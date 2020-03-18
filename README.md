@@ -1,0 +1,2 @@
+# interactive_senryu
+川柳の上五を入力するとAIが続く語を返すアプリ
