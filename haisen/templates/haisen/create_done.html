@@ -1,0 +1,31 @@
+{% extends 'haisen/base.html' %}
+{% block content %}
+
+ <div class="content-wrapper">
+   <div class="container-fluid">
+     <!-- Breadcrumbs-->
+     <ol class="breadcrumb">
+       <!-- <li class="breadcrumb-item">
+          <a href="{% url 'haisen:haisen_list' %}">TOP</a>
+       </li> -->
+       <li class="breadcrumb-item">
+
+         <a href="{% url 'haisen:haisen_create' %}">初句入力</a>
+       </li>
+       <li class="breadcrumb-item active">インタラクティブ川柳</li>
+     </ol>
+     <!-- Example DataTables Card-->
+     <div class="card mb-3">
+       <div class="card-header">
+         <i class="fa fa-server"></i> <b>インタラクティブ川柳</b></div>
+       <div class="card-body">
+         <!-- 円グラフの描画-->
+         <div class="chart_container">
+             <canvas id='CircleChart' style="position: relative; height:1vh; width:1vw"></canvas>
+         </div>
+         <div class="abc">
+           <font size="20">{{total}}</font>
+           <p>AIが二句を返しました！　結句の5音を想像してみてください。</p>
+         </div>
+
+{% endblock content %}
