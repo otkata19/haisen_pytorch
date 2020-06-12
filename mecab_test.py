@@ -1,5 +1,4 @@
 import re
-import numpy as np
 import io,sys
 import MeCab
 import subprocess
@@ -9,10 +8,10 @@ path = (subprocess.Popen(cmd, stdout=subprocess.PIPE,shell=True).communicate()[0
 m=MeCab.Tagger("-d {0}".format(path))
 
 def user_input(text):
-    clean_i = re.sub(re.compile('[!"#$%&\'\\\\()*+,-./:;<=>?@[\\]^_`{|}~「」〔〕“”〈〉『』【】＆＊・（）＄＃＠。、？！｀＋￥％]'), '', text) # 記号の削除
+    # 記号の削除
+    clean_i = re.sub(re.compile('[!"#$%&\'\\\\()*+,-./:;<=>?@[\\]^_`{|}~「」〔〕“”〈〉『』【】＆＊・（）＄＃＠。、？！｀＋￥％]'), '', text)
     sentence = clean_i.replace("　", "").replace(" ", "") # スペースの消去
     node = m.parseToNode(sentence).next #解析してノードに変換
-
     word_list = []
     while node.next: #nodeがfalseになるまで
         word_list.append(node.surface)

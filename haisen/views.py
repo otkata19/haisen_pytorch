@@ -32,10 +32,13 @@ from seq2seq_module import ai_return
 def create_done(request):
     haisen_data = Haisen.objects.last()
     user_kami5 = haisen_data.money
-    ai_naka7 = ai_return(user_kami5)
-    five_seven_five = user_kami5 + str('　') + ai_naka7 + str('　') + str('〇〇〇〇〇')
+    # naka7_listには、AIが予測する中七の候補が順番に入る
+    naka7_list = ai_return(user_kami5)
+    pre1 = user_kami5 + str('　') + naka7_list[0] + str('　　') + str('〇〇〇〇〇')
+    pre2 = user_kami5 + str('　') + naka7_list[1] + str('　') + str('〇〇〇〇〇')
+    pre3 = user_kami5 + str('　') + naka7_list[2] + str('　') + str('〇〇〇〇〇')
     #登録処理が正常終了した場合に呼ばれるテンプレートを指定
-    return render(request, 'haisen/create_done.html', {'total':five_seven_five})
+    return render(request, 'haisen/create_done.html', {'total1':pre1, 'total2':pre2, 'total3':pre3})
 
 class HaisenUpdateView(UpdateView):
    #利用するモデルを指定
