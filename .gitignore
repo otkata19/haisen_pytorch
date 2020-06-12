@@ -2,3 +2,6 @@ static/
 db.sqlite3
 __pycache__/
 haisen/__pycache__/
+requirements.txt
+runtime.txt
+local_settings.py

@@ -1,0 +1,1 @@
+web: gunicorn haisen_pytorch.wsgi --log-file -
