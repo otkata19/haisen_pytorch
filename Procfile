@@ -1,1 +1,1 @@
-web: gunicorn haisen_pytorch.wsgi --log-file -
+web: gunicorn haisen-pytorch.wsgi --log-file -
