@@ -1,5 +1,5 @@
 """
-WSGI config for haisen_project project.
+WSGI config for haisen_pytorch project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
