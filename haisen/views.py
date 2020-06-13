@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 # Create your views here.
 #ここから下を追加
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
-from .models import Category, Haisen
+from .models import Haisen
 
 #一覧表示用のDjango標準ビュー(ListView)を承継して一覧表示用のクラスを定義
 class HaisenListView(ListView):
