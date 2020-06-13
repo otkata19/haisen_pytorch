@@ -1,7 +1,5 @@
-static/
+static/seq2seq_calculator_v100.pt
 db.sqlite3
 __pycache__/
 haisen/__pycache__/
-requirements.txt
-runtime.txt
 local_settings.py

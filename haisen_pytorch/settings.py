@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware', #追加
 ]
 
-ROOT_URLCONF = 'haisen_project.urls'
+ROOT_URLCONF = 'haisen_pytorch.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'haisen_project.wsgi.application'
+WSGI_APPLICATION = 'haisen_pytorch.wsgi.application'
 
 
 # Database
