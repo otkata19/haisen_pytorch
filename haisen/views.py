@@ -28,13 +28,13 @@ class HaisenCreateView(CreateView):
     #登録処理が正常終了した場合の遷移先を指定
     success_url = reverse_lazy('haisen:create_done')
 
-from seq2seq_module import ai_return
+from seq2seq import ai_return
 def create_done(request):
     haisen_data = Haisen.objects.last()
     user_kami5 = haisen_data.money
     # naka7_listには、AIが予測する中七の候補が順番に入る
     naka7_list = ai_return(user_kami5)
-    pre1 = user_kami5 + str('　') + naka7_list[0] + str('　　') + str('〇〇〇〇〇')
+    pre1 = user_kami5 + str('　') + naka7_list[0] + str('　') + str('〇〇〇〇〇')
     pre2 = user_kami5 + str('　') + naka7_list[1] + str('　') + str('〇〇〇〇〇')
     pre3 = user_kami5 + str('　') + naka7_list[2] + str('　') + str('〇〇〇〇〇')
     #登録処理が正常終了した場合に呼ばれるテンプレートを指定
