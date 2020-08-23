@@ -11,7 +11,7 @@ class Haisen(models.Model):
        verbose_name_plural ="俳句と川柳"    #追加
 
    #カラムの定義
-   money = models.CharField(verbose_name="初句を構成する5音を入力してください", max_length=500)
+   money = models.CharField(verbose_name="五・七・五の上五を入力すると、AIが中七の候補を返します。", max_length=500)
    """
    def __str__(self):
        return self.memo

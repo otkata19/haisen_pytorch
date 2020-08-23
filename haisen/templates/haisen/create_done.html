@@ -10,26 +10,27 @@
        </li> -->
        <li class="breadcrumb-item">
 
-         <a href="{% url 'haisen:haisen_create' %}">初句入力</a>
+         <a href="{% url 'haisen:haisen_create' %}">上五入力</a>
        </li>
-       <li class="breadcrumb-item active">インタラクティブ川柳</li>
+       <li class="breadcrumb-item active">インタラクティブ五七五</li>
      </ol>
      <!-- Example DataTables Card-->
      <div class="card mb-3">
        <div class="card-header">
-         <i class="fa fa-server"></i> <b>インタラクティブ川柳</b></div>
+         <i class="fa fa-server"></i> <b>インタラクティブ五七五</b></div>
        <div class="card-body">
          <!-- 円グラフの描画-->
          <div class="chart_container">
              <canvas id='CircleChart' style="position: relative; height:1vh; width:1vw"></canvas>
          </div>
          <div class="abc">
-           <font size="20">{{total1}}</font>
+           <font size="20" face="游明朝体">{{total1}}</font>
            <br>
-           <font size="20">{{total2}}</font>
+           <font size="20" face="游明朝体">{{total2}}</font>
            <br>
-           <font size="20">{{total3}}</font>
-           <p>AIが二句を返しました！　結句の5音を想像してみてください。</p>
+           <font size="20" face="游明朝体">{{total3}}</font>
+           <br><br>
+           <p><font size="3">AIが中七を返しました！下五を考えて五七五を完成させましょう。</font></p>
          </div>
 
 {% endblock content %}
