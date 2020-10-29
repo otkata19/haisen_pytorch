@@ -11,16 +11,16 @@
            <div class="container-fluid">
              <!-- Breadcrumbs-->
              <ol class="breadcrumb">
-               <!-- <li class="breadcrumb-item">
-                 <a href="{% url 'haisen:haisen_list' %}">TOP</a>
-               </li> -->
+               <li class="breadcrumb-item">
+                 <a href="{% url 'haisen:haiku_create' %}">俳句風に切り替え</a>
+               </li>
                <li class="breadcrumb-item active">インタラクティブ五七五</li>
                <li class="breadcrumb-item active">上五入力</li>
              </ol>
              <!-- Example DataTables Card-->
              <div class="card mb-3">
                <div class="card-header">
-                 <i class="fa fa-server"></i> <h3>上五入力</h3></div>
+                 <i class="fa fa-server"></i> <h3>上五入力（川柳風）</h3></div>
                <div class="card-body">          {{ form|bootstrap }}
        </div>
      </div>

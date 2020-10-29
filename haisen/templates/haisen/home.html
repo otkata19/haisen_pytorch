@@ -1,0 +1,24 @@
+{% extends 'haisen/base.html' %}
+{% load bootstrap %}
+{% block content %}
+
+<div class="container">
+    <div class="col text-center">
+        <h1> インタラクティブ五七五 </h1>
+        <br>
+          <p>
+            <a class="btn btn-success" href="{% url 'haisen:haiku_create' %}" role="button">俳句風</a>
+         </p>
+         <p>
+            <a class="btn btn-success" href="{% url 'haisen:haisen_create' %}" role="button">川柳風</a>
+        </p>
+        <!-- <form action="{% url 'haisen:haiku_create' %}">
+           <input id = 'next' type="submit" value="俳句風"/>
+        </form> 
+        <form action="{% url 'haisen:haisen_create' %}">
+            <input id = 'next' type="submit" value="川柳風"/>
+        </form> -->
+    </div>
+</div>
+
+{% endblock %}

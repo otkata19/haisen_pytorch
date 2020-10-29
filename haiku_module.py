@@ -13,31 +13,31 @@ tokenizer = BertJapaneseTokenizer.from_pretrained('cl-tohoku/bert-base-japanese-
 
 #### Seq2Seqモデルの定義 ####
 class Encoder(nn.Module):
-    def __init__(self, vocab_size, embedding_dim, hidden_dim, batch_size=100):
+    def __init__(self, vocab_size, embedding_dim, hidden_dim, batch_size=1024):
         super(Encoder, self).__init__()
         self.hidden_dim = hidden_dim
         self.batch_size = batch_size
 
         self.word_embeddings = nn.Embedding(vocab_size, embedding_dim, )
-        self.gru = nn.GRU(embedding_dim, hidden_dim, batch_first=True)
+        self.gru = nn.GRU(embedding_dim, hidden_dim, batch_first=True, bidirectional=True)
 
     def forward(self, indices):
         embedding = self.word_embeddings(indices)
         if embedding.dim() == 2:
             embedding = torch.unsqueeze(embedding, 1)
-        _, state = self.gru(embedding, torch.zeros(1, self.batch_size, self.hidden_dim, device=device))
+        _, state = self.gru(embedding, torch.zeros(2, self.batch_size, self.hidden_dim, device=device))
         
         return state
 
 class Decoder(nn.Module):
-    def __init__(self, vocab_size, embedding_dim, hidden_dim, batch_size=100):
+    def __init__(self, vocab_size, embedding_dim, hidden_dim, batch_size=1024):
         super(Decoder, self).__init__()
         self.hidden_dim = hidden_dim
         self.batch_size = batch_size
 
-        self.word_embeddings = nn.Embedding(vocab_size, embedding_dim, )
-        self.gru = nn.GRU(embedding_dim, hidden_dim, batch_first=True)
-        self.output = nn.Linear(hidden_dim, vocab_size)
+        self.word_embeddings = nn.Embedding(vocab_size, embedding_dim)
+        self.gru = nn.GRU(embedding_dim, hidden_dim, batch_first=True, bidirectional=True)
+        self.output = nn.Linear(hidden_dim*2, vocab_size)
 
     def forward(self, index, state):
         embedding = self.word_embeddings(index)
@@ -48,18 +48,18 @@ class Decoder(nn.Module):
         return output, state
 #### モデルの定義終わり ####
 
-def ai_return(text):
+def haiku_return(text):
     id_list = tokenizer.encode(text)
     del id_list[0]
     del id_list[-1]
-    # 長さを5に合わせるため、2を末尾に加えてパディング
-    while len(id_list) < 10:
+    # 長さを合わせるためパディング
+    while len(id_list) < 7:
         id_list.append(0)
     # Encoder, Decoderクラスのインスタンス化
     encoder = Encoder(vocab_size, embedding_dim, hidden_dim, batch_size=1).to(device)
     decoder = Decoder(vocab_size, embedding_dim, hidden_dim, batch_size=1).to(device)
     #推論
-    model_name = "static/seq2seq_bert_test_v{}.pt".format("200")
+    model_name = "static/seq2seq_201016_v{}.pt".format("180")
     checkpoint = torch.load(model_name, map_location='cpu')
     encoder.load_state_dict(checkpoint["encoder_model"])
     decoder.load_state_dict(checkpoint["decoder_model"])
