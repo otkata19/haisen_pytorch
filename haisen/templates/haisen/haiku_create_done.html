@@ -3,36 +3,62 @@
 
  <div class="content-wrapper">
    <div class="container-fluid">
-     <!-- Breadcrumbs-->
-     <ol class="breadcrumb">
-       <!-- <li class="breadcrumb-item">
-          <a href="{% url 'haisen:haisen_list' %}">TOP</a>
-       </li> -->
-       <li class="breadcrumb-item">
-        <a href="{% url 'haisen:haisen_create' %}">川柳風に切り替え</a>
-      </li>
-       <li class="breadcrumb-item">
-         <a href="{% url 'haisen:haiku_create' %}">上五入力</a>
-       </li>
-       <li class="breadcrumb-item active">インタラクティブ五七五</li>
-     </ol>
+    <form action="{% url 'haisen:finished_work' %}" method="post">
      <!-- Example DataTables Card-->
      <div class="card mb-3">
-       <div class="card-header">
-         <i class="fa fa-server"></i> <b>インタラクティブ五七五</b></div>
+
        <div class="card-body">
-         <!-- 円グラフの描画-->
-         <div class="chart_container">
-             <canvas id='CircleChart' style="position: relative; height:1vh; width:1vw"></canvas>
-         </div>
-         <div class="abc">
-           <font size="20" face="游明朝体">{{total1}}</font>
-           <br>
+        <p>
+          <label>
+          <input type="radio" name="haisen" value="{{total1}}" required>{{total1}}
+          </label>
+        </p>
+        <p>
+          <label>
+          <input type="radio" name="haisen" value="{{total2}}">{{total2}}
+          </label>
+        </p>
+        <p>
+          <label>
+          <input type="radio" name="haisen" value="{{total3}}">{{total3}}
+          </label>
+        </p>
+        <label for="text1">下五を入力する:</label>
+        <input type="text" name="text1" class="form-control" required style="text-align: center;">
+      <!--
+        <div class="radio">
+          <input type="radio" name="haisen" id="radio-01" value="{{total1}}" required>
+          <label for="radio-01">{{total1}}</label><br>
+          <input type="radio" name="haisen" id="radio-02" value="{{total2}}">
+          <label for="radio-02">{{total2}}</label><br>
+          <input type="radio" name="haisen" id="radio-03" value="{{total3}}">
+          <label for="radio-03">{{total3}}</label><br>
+      </div> -->
+        <!--
+         <p>
+          <font size="20" face="游明朝体">{{total1}}</font>
+         </p>
+         <p>
            <font size="20" face="游明朝体">{{total2}}</font>
-           <br>
+         </p>
+         <p>
            <font size="20" face="游明朝体">{{total3}}</font>
-           <br><br>
-           <p><font size="3">AIが中七を返しました！下五を考えて五七五を完成させましょう。</font></p>
-         </div>
+         </p>
+        -->
+       </div>
+     </div>
+     <!-- 遷移するボタン-->
+     <p><button class="btn btn-primary" type="submit" style="width:150px">俳句を完成させる</button></p>
+     <!--
+     <p><a class="btn btn-primary" style="width:150px" 
+      href="{% url 'haisen:haiku_create' %}" role="button">俳句を完成させる</a></p>-->
+      {% csrf_token %}
+    <!-- formタグを閉じる -->
+    </form>
+
+     <p><a class="btn btn-dark" style="width:150px" 
+      href="{% url 'haisen:haiku_create' %}" role="button">上五の入力に戻る</a></p>
+     <p><a class="btn btn-success" style="width:150px" 
+      href="{% url 'haisen:haisen_create' %}" role="button">川柳風に切り替える</a></p>
 
 {% endblock content %}

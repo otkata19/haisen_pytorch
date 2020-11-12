@@ -1,0 +1,42 @@
+<!doctype html>
+<html style="height: 100%;">
+<head>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ {# Bootstrap4を使う #}
+ <!-- linkタグでbootstrapのcssファイルを読み込む -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+ <!-- linkタグでDataTableのcssファイルを読み込む -->
+ <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/>
+ <!-- タイトルの設定-->
+<title>インタラクティブ五七五</title>
+</head>
+<body style="height: 100%; overflow-y: scroll;">
+
+<!--　▼ ジャンボトロン　 -->
+<div class="jumbotron" style="background:url(../../static/haisen/japanese-style_00002.jpg); 
+            background-size: cover; background-position: center; height: 100%;">
+<div class="mx-auto" style="width: 200px;">
+    <section class="ikku" style="writing-mode: vertical-rl;">
+    <p>
+        <font size="20" face="游明朝体" style="color: white; opacity: 1.0; text-shadow:0 0 7px #0b0b0b;">{{kami5}}</font>
+    </p>
+    <p style="padding-top: 3em;">
+        <font size="20" face="游明朝体" style="color: white; opacity: 1.0; text-shadow:0 0 7px #0b0b0b;">{{naka7}}</font>
+    </p>
+    <p style="padding-top: 9em;">
+        <font size="20" face="游明朝体" style="color: white; opacity: 1.0; text-shadow:0 0 7px #0b0b0b;">{{shimo5}}</font>
+    </p>
+    </section>
+</div>
+
+<div class="center" style="text-align:center;">
+    <br>
+    <p>
+    <a class="btn btn-success" style="width:150px" 
+        href="{% url 'haisen:haiku_create' %}" role="button">俳句風の上五入力へ</a>
+    <a class="btn btn-success" style="width:150px" 
+        href="{% url 'haisen:haisen_create' %}" role="button">川柳風の上五入力へ</a>
+    </p>
+</div>
+    

@@ -42,52 +42,37 @@ class HaikuCreateView(CreateView):
     #登録処理が正常終了した場合の遷移先を指定
     success_url = reverse_lazy('haisen:haiku_create_done')
 
-def home(request):
-    # 対応するhtmlファイルを指定
-    return render(request, 'haisen/home.html')
-
 from haiku_module import haiku_return
 from senryu_module import senryu_return
 
 def haiku_create_done(request):
-    haisen_data = Haisen.objects.last()
-    user_kami5 = haisen_data.money
+    user_kami5 = request.POST['kami5']
     # naka7_listには、AIが予測する中七の候補が順番に入る
     naka7_list = haiku_return(user_kami5)
-    pre1 = user_kami5 + str('　') + naka7_list[0] + str('　') + str('〇〇〇〇〇')
-    pre2 = user_kami5 + str('　') + naka7_list[1] + str('　') + str('〇〇〇〇〇')
-    pre3 = user_kami5 + str('　') + naka7_list[2] + str('　') + str('〇〇〇〇〇')
+    pre1 = user_kami5 + str(' ') + naka7_list[0]
+    pre2 = user_kami5 + str(' ') + naka7_list[1]
+    pre3 = user_kami5 + str(' ') + naka7_list[2]
     #登録処理が正常終了した場合に呼ばれるテンプレートを指定
     return render(request, 'haisen/haiku_create_done.html', {'total1':pre1, 'total2':pre2, 'total3':pre3})
 
 def create_done(request):
-    haisen_data = Haisen.objects.last()
-    user_kami5 = haisen_data.money
+    user_kami5 = request.POST['kami5']
     # naka7_listには、AIが予測する中七の候補が順番に入る
     naka7_list = senryu_return(user_kami5)
-    pre1 = user_kami5 + str('　') + naka7_list[0] + str('　') + str('〇〇〇〇〇')
-    pre2 = user_kami5 + str('　') + naka7_list[1] + str('　') + str('〇〇〇〇〇')
-    pre3 = user_kami5 + str('　') + naka7_list[2] + str('　') + str('〇〇〇〇〇')
+    pre1 = user_kami5 + str(' ') + naka7_list[0]
+    pre2 = user_kami5 + str(' ') + naka7_list[1]
+    pre3 = user_kami5 + str(' ') + naka7_list[2]
     #登録処理が正常終了した場合に呼ばれるテンプレートを指定
     return render(request, 'haisen/create_done.html', {'total1':pre1, 'total2':pre2, 'total3':pre3})
 
-class HaisenUpdateView(UpdateView):
-   #利用するモデルを指定
-   model = Haisen
-   #利用するフォームクラス名を指定
-   form_class = HaisenForm
-   #更新処理が正常終了した場合の遷移先を指定
-   success_url = reverse_lazy('haisen:update_done')
-
-def update_done(request):
-    #更新処理が正常終了した場合に呼ばれるテンプレートを指定
-    return render(request, 'haisen/update_done.html')
-
-class HaisenDeleteView(DeleteView):
-    #利用するモデルを指定
-    model = Haisen
-    #削除処理が正常終了した場合の遷移先を指定
-    success_url = reverse_lazy('haisen:delete_done')
-
-def delete_done(request):
-    return render(request, 'haisen/delete_done.html')
+def form_post(request):
+    kami5_naka7_list = request.POST['haisen'].split()
+    kami5, naka7 = kami5_naka7_list[0], kami5_naka7_list[1]
+    context = {
+        'kami5_naka7': request.POST['haisen'],
+        'kami5': kami5,
+        'naka7':naka7,
+        'shimo5': request.POST['text1'],
+        }
+    
+    return render(request, 'haisen/finished_work.html', context)

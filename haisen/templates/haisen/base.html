@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html style="height: 100%;">
 <head>
  <meta charset="utf-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,12 +9,22 @@
  <!-- linkタグでDataTableのcssファイルを読み込む -->
  <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/>
  <!-- タイトルの設定-->
- <title>インタラクティブ五七五</title>
+<title>インタラクティブ五七五</title>
 </head>
-<body>
- {% block content %}
-  <!-- block content ～ endblockの間に子テンプレートの内容が差し込まれる -->
- {% endblock %}
+<body style="height: 100%; overflow-y: scroll;">
+<!--　▼ ジャンボトロン　 -->
+<div class="jumbotron text-center" style="background:url(../../static/haisen/japanese-style_00002.jpg); 
+            background-size: cover; background-position: center; height: 100%;">
+      <div class="h-100 justify-content-center align-items-center">
+      <p><h1 style="color: #ffffff; opacity: 1.0; text-shadow:0 0 7px #0b0b0b;">インタラクティブ<br class="d-lg-none">五七五</h1></p>
+      <p>
+      {% block content %}
+      <!-- block content ～ endblockの間に子テンプレートの内容が差し込まれる -->
+      {% endblock %}
+      </p>
+      </div>
+</div>
+
  <!-- bootstrapのjavascript読み込み-->
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
  <!-- DataTablesのjavascript読み込み-->
@@ -22,60 +32,6 @@
  <!-- chart.jsの読み込み -->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
- <script>
-    jQuery(function($){
-      // デフォルトの設定を変更
-      $.extend( $.fn.dataTable.defaults, {
-          language: {
-              url: "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
-              }
-              });
-      $("#haisen_list").DataTable({
-          "searching": true,     //検索機能
-          "paging":   true,      //ページング機能
-          "ordering": true,      //ソート機能
-          "lengthChange": true,  //件数切り替え機能
-
-          }).columns.adjust().draw();
-          });
- </script>
-
- <!-- 描画する円グラフの定義-->
- <script>
-    var ctx = document.getElementById('CircleChart').getContext('2d');
-    /*
-    var data = [
-                [
-                 {% for key, value in category_dict.items%}
-                  '{{key}}',
-                 {% endfor %}
-                ],
-
-                [
-                {% for key, value in category_dict.items%}
-                   {{value}},
-                {% endfor %}
-                ]]
-
-    var data = [
-
-                ]
-                    */
-    var myChart = new Chart(ctx, {
-      type: 'pie',
-
-      data: {
-        //labels: data[0],
-        datasets: [{
-          data:  total,
-          backgroundColor: ["rgba(255,241,15,0.8)","rgba(54,164,235,0.8)",
-          "rgba(0,255,65,0.8)","rgba(214,216,165,0.8)","rgba(255,94,25,0.8)",
-          "rgba(84,77,203,0.8)","rgba(140,140,140,0.8)","rgba(171,255,127,0.8)",
-          "rgba(50,204,18,0.8)","rgba(234,210,173,0.8)"],
-        },
-      ] }
-    });
-  </script>
-
+</div>
 </body>
 </html>
