@@ -31,14 +31,11 @@
      </div>
      </div>
      <!-- 遷移するボタン-->
-     <p><button class="btn btn-primary" type="submit" style="width:150px">川柳を完成させる</button></p>
+     <p><button class="btn btn-success" type="submit" style="width:170px">五七五を完成させる</button></p>
       {% csrf_token %}
     <!-- formタグを閉じる -->
     </form>
-     <p><a class="btn btn-dark" style="width:150px" 
+     <p><a class="btn btn-dark" style="width:170px" 
       href="{% url 'haisen:haisen_create' %}" role="button">上五の入力に戻る</a></p>
-    
-     <p><a class="btn btn-success" style="width:150px" 
-      href="{% url 'haisen:haiku_create' %}" role="button">俳句風に切り替える</a></p>
 
 {% endblock content %}

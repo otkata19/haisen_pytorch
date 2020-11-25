@@ -3,7 +3,7 @@
 {% block content %}
 
  <!-- formタグを設定し、postメソッドを指定 -->
- <form action="{% url 'haisen:create_done' %}" method="post">
+ <form action="{% url 'haisen:haiku_create_done' %}" method="post">
    <div class="container">
        <div class="col-12">
          <div class="content-wrapper">
@@ -11,7 +11,7 @@
              <!-- Example DataTables Card-->
              <div class="card mb-3">
                <div class="card-header">
-                 <i class="fa fa-server"></i> <h3>上五入力（川柳風）</h3></div>
+                 <i class="fa fa-server"></i> <h3>上五の入力</h3></div>
                <div class="card-body";>          
                 <label for="text1">五・七・五の上五を入力すると、AIが中七の候補を返します。</label>
                 <input type="text" name="kami5" class="form-control" required style="text-align: center;">
@@ -20,8 +20,9 @@
      <div class="row">
        <div class="col-12">
          <!-- データ保存ボタンを設定 -->
-         <p><button class="btn btn-primary" style="width:150px">中七を生成する</button></p>
-         <p><a class="btn btn-success" style="width:150px" href="{% url 'haisen:haiku_create' %}" role="button">俳句風に切り替える</a></p>
+         <p><button class="btn btn-success" style="width:170px">俳句風の中七を生成</button></p>
+         <p><button class="btn btn-success" type="submit" formaction="{% url 'haisen:create_done' %}" 
+          style="width:170px">川柳風の中七を生成</button></p>
        </div>
      </div>
    </div>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html style="height: 100%;">
+<head>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ {# Bootstrap4を使う #}
+ <!-- linkタグでbootstrapのcssファイルを読み込む -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+ <!-- linkタグでDataTableのcssファイルを読み込む -->
+ <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/>
+ <!-- タイトルの設定-->
+<title>インタラクティブ五七五</title>
+</head>
+<body style="height: 100%; overflow-y: scroll;">
+
+<!--　▼ ジャンボトロン　 -->
+<div class="h-100 justify-content-center align-items-center" style="text-align: center;">
+ <div class="content-wrapper">
+   <div class="container-fluid">
+     <!--ページタイトル-->
+     <h1>作品リスト</h1>
+     <div class="card mb-3">
+       <div class="card-body">
+         <!-- テーブル表の定義 -->
+         <div class="table-responsive">
+         <table id=haisen_list width="100%" class="table text-nowrap table-striped table-condensed table-bordered table-hover">
+           　<!-- 表の列の定義-->
+             <thead>
+               <tr>
+                 <th class="text-center">作者</th>
+                 <th class="text-center">五七五</th>
+               </tr>
+             </thead>
+           　<!-- ここまでが表の列の定義-->
+           　<!-- 表のデータ部分の表示-->
+             <tbody>
+               {% for item in data %}
+                 <tr class="odd gradeX text-center">
+                   <td class="text-center" width="50">{{item.name}}</td>
+                   <td class="text-center" width="100">{{item.haisen}}</td>
+                 </tr>
+               {% endfor %}
+             </tbody>
+           　<!-- ここまでが表のデータ部分の表示-->
+           </table>
+           <!-- ここまでがテーブル表の定義 -->
+       </div>
+      </div>
+      </div>
+      <p><a class="btn btn-dark" style="width:170px" 
+        href="{% url 'haisen:haisen_create' %}" role="button">上五の入力に戻る</a></p>
+   </div>
+  </div>
+
+ <!-- bootstrapのjavascript読み込み-->
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+ <!-- DataTablesのjavascript読み込み-->
+ <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+ <!-- chart.jsの読み込み -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<!-- Databableの定義-->
+<script>
+    jQuery(function($){
+      // デフォルトの設定を変更
+      $.extend( $.fn.dataTable.defaults, {
+          language: {
+              url: "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+              }
+              });
+      $("#haisen_list").DataTable({
+          "searching": true,     //検索機能
+          "paging":   true,      //ページング機能
+          "ordering": true,      //ソート機能
+          "lengthChange": true,  //件数切り替え機能
+
+          }).columns.adjust().draw();
+          });
+</script>
+</body>
+</html>

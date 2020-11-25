@@ -5,6 +5,6 @@ from .models import Haisen
 
 #追加
 class HaisenAdmin(admin.ModelAdmin):
-    list_display=('money',)
+    list_display=('haisen',)
 
 admin.site.register(Haisen,HaisenAdmin)

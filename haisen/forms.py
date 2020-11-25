@@ -7,4 +7,4 @@ class HaisenForm(forms.ModelForm):
    """
    class Meta:
        model = Haisen
-       fields =['money',]
+       fields =['haisen',]
