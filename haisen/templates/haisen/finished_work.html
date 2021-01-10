@@ -32,17 +32,15 @@
         <font>{{shimo5}}</font>
     </p>
     </section>
-    <label for="name" style="color:white; text-align:center; display: block;">作者名を入力する:</label>
+    <label for="name" style="color:white; text-align:center; display: block;">ペンネームを入力する:</label>
     <input type="text" name="name" class="form-control" style="text-align: center;">
 </div>
-
 <div class="center" style="text-align:center;">
     <br>
     <button class="btn btn-success" type="submit" name="work" value="{{work}}" style="width:170px">五七五を登録する</button>
     <a class="btn btn-dark" style="width:170px" 
         href="{% url 'haisen:haisen_create' %}" role="button">上五の入力に戻る</a>
 </div>
-
 {% csrf_token %}
 <!-- formタグを閉じる -->
 </form>

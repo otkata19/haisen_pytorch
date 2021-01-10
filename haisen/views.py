@@ -95,6 +95,7 @@ def haisen_list(request):
         haisen, name = request.POST['work'], request.POST['name']
         l = Haisen.objects.create(haisen=haisen, name=name)
     data = Haisen.objects.all().order_by("-time")
+    data = Haisen.objects.all()
     context = {
         'haisen': haisen,
         'name': name,
@@ -102,3 +103,6 @@ def haisen_list(request):
         }
     
     return render(request, 'haisen/haisen_list.html', context)
+
+def notes(request):
+    return render(request, 'haisen/notes.html')

@@ -10,4 +10,5 @@ urlpatterns = [
     path('haiku_create_done/', views.haiku_create_done, name='haiku_create_done'),
     path('create_done/', views.create_done, name='create_done'),
     path('finished_work/', views.form_post, name='finished_work'),
+    path('notes/', views.notes, name='notes'),
     ]
