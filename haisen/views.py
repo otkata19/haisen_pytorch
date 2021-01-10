@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from . forms import HaisenForm  #forms.pyからhaisenFormをインポート
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -90,19 +90,17 @@ def form_post(request):
     
     return render(request, 'haisen/finished_work.html', context)
 
-def haisen_list(request):
+# Haisenモデルに登録後、redirectする関数
+def registration(request):
     if request.method == "POST":
         haisen, name = request.POST['work'], request.POST['name']
-        l = Haisen.objects.create(haisen=haisen, name=name)
-    data = Haisen.objects.all().order_by("-time")
+        Haisen.objects.create(haisen=haisen, name=name)
+    return redirect(reverse_lazy('haisen:haisen_list'))
+
+# Haisenモデルをhaisen_list.htmlに渡す関数
+def haisen_list(request):
     data = Haisen.objects.all()
-    context = {
-        'haisen': haisen,
-        'name': name,
-        'data': data
-        }
-    
-    return render(request, 'haisen/haisen_list.html', context)
+    return render(request, 'haisen/haisen_list.html', {'data': data})
 
 def notes(request):
     return render(request, 'haisen/notes.html')
