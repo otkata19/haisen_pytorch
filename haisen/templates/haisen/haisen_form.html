@@ -11,7 +11,7 @@
              <!-- Example DataTables Card-->
              <div class="card mb-3">
                <div class="card-header">
-                 <i class="fa fa-server"></i> <h3>上五の入力</h3></div>
+                 <i class="fa fa-server"></i> <h4><b>上五の入力</b></h4></div>
                <div class="card-body";>          
                 <label for="text1">五・七・五の上五を入力すると、<br class="d-lg-none">AIが中七の候補を返します。</label>
                 <input type="text" name="kami5" class="form-control" required style="text-align: center;">
@@ -23,6 +23,8 @@
          <p><button class="btn btn-success" style="width:170px">俳句風の中七を生成</button></p>
          <p><button class="btn btn-success" type="submit" formaction="{% url 'haisen:create_done' %}" 
           style="width:170px">川柳風の中七を生成</button></p>
+         <p><a class="btn btn-dark" style="width:170px" 
+            href="{% url 'haisen:haisen_list' %}" role="button">作品リストを見る</a></p>
        </div>
      </div>
       <a href="{% url 'haisen:notes' %}">
