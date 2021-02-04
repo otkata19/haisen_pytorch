@@ -3,6 +3,8 @@ import pickle
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import re
+import MeCab
 from transformers import BertJapaneseTokenizer
 
 embedding_dim = 300
@@ -48,6 +50,20 @@ class Decoder(nn.Module):
         return output, state
 #### モデルの定義終わり ####
 
+# 中七が七音か判定する関数
+def judge_7(predict):
+    m = MeCab.Tagger()
+    node = m.parseToNode(predict).next # 解析してノードに変換
+    pronunciation = ''
+    while node.next: # nodeがfalseになるまで
+        yomi = node.feature.split(",")[-2] # 分析結果から読みを取得
+        node = node.next # 次の要素に移動（末尾の場合はfalseになる）
+        pronunciation += yomi
+    kana_count = [letter for letter in re.findall(r'.[ァィゥェォャュョ]?', pronunciation)]
+
+    return pronunciation
+
+# 上五に対して中七を返す関数
 def haiku_return(text):
     id_list = tokenizer.encode(text)
     del id_list[0]
@@ -81,7 +97,7 @@ def haiku_return(text):
         indices = torch.argsort(prob.cpu().detach(), descending=True)
         # 並び替えたリストをもとに、値が大きい順（上位3つ）に予測していく
         naka7_list = []
-        for i in indices[:3]:
+        for i in indices[:]:
             i = i.item()
             state = default_state
             pre_7 = [i]
@@ -95,6 +111,16 @@ def haiku_return(text):
             # [SEP]の3を取り除いて新しいリストを生成
             predict = [tokenizer.convert_ids_to_tokens(j) for j in pre_7 if j != 3]
             predict = ''.join(predict).replace('#', '').replace('[UNK]', '')
-            naka7_list.append(predict)
+            # 中の句が七音だった場合はリストに加える
+            pronunciation = judge_7(predict)
+            if len(pronunciation) == 7:
+                naka7_list.append(predict)
+            # リストに中七が三つ入ったらbreak
+            if len(naka7_list) == 3:
+                break
+
+        # 七音の中の句が三つにならなかった場合は、先頭の中七を三つ返す
+        if len(naka7_list) < 3:
+            naka7_list = list(naka7_list[0]*3)
 
     return naka7_list
